@@ -1,4 +1,12 @@
-require('dotenv').config()
+require('dotenv').config();
+const bodyParser = require("body-parser");
+
+//lancer le serveur : (powershell)>node --watch server.js
+//      /ou/          (bash)> npm run start
+// localhost:3000
+
+
+
 
 let express = require('express');
 let app = express();
@@ -69,9 +77,23 @@ app.get("/name", (req,res) => {
     res.json({name: `${firstName} ${lastName}`});
 })
 
-//lancer le serveur : (powershell)>node --watch server.js 
-// /ou/               (bash)> npm run start
-// localhost:3000
+
+
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+
+app.post("/name", (req,res) => {
+    const firstName = req.body.first;
+    const lastName = req.body.last;
+    // ou: // const { first: firstName, last: lastName} = req.query;
+    res.json({name: `${firstName} ${lastName}` });
+    // essayer: res.json({name: req.body });
+})
+
+
+
+
+
 
 
 
