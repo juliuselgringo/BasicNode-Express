@@ -9,6 +9,17 @@ app.use(function middleware(req, res, next){
     next();
 })
 
+app.get(
+    '/now', 
+    (req,res,next) => {
+        req.time = new Date().toString();
+        next();
+    },
+    (req,res) => {
+        res.send({time:req.time});
+    }
+)
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 })
@@ -26,7 +37,11 @@ app.get("/json", (req,res) => {
     res.json({"message": response});
 })
 
-//lancer le serveur : node --watch server.js
+
+
+//lancer le serveur : (powershell)>node --watch server.js 
+// /ou/               (bash)> npm run start
+// localhost:3000
 
 
 
