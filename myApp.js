@@ -3,6 +3,12 @@ require('dotenv').config()
 let express = require('express');
 let app = express();
 
+app.use(function middleware(req, res, next){
+    const response = req.method + " " + req.path + " - " + req.ip;
+    console.log(response);
+    next();
+})
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 })
