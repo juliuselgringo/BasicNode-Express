@@ -49,7 +49,7 @@ app.get("/json", (req,res) => {
 })
 
 /**
-* récupérer des données de l'utilisateur
+* récupérer des données de l'utilisateur par get
 * pour tester: utiliser localhost:3000/cplusclair/echo
 * la page affichera le json: {"echo": "cplusclair"}
 */
@@ -58,7 +58,16 @@ app.get("/:word/echo", (req, res) => {
     res.json({echo : word});
 })
 
-
+/**
+ * récupérer des données de l'utilisateur par get
+ * pour tester: localhost:3000/name?first=jul&last=R
+ */
+app.get("/name", (req,res) => {
+    const firstName = req.query.first;
+    const lastName = req.query.last;
+    // ou: // const { first: firstName, last: lastName} = req.query;
+    res.json({name: `${firstName} ${lastName}`});
+})
 
 //lancer le serveur : (powershell)>node --watch server.js 
 // /ou/               (bash)> npm run start
